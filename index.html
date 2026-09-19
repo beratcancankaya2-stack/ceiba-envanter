@@ -814,4 +814,14 @@ function teknisyenAdiniDuzenle() {
 }
 function teknisyenAdiniKaydet() {
   var v = document.getElementById('adInput').value.trim();
-  if (!v) {
+  if (!v) { toast('Lütfen adını gir', 'err'); return; }
+  localStorage.setItem(TEKNISYEN_KEY, v);
+  modalKapat('modalAd');
+  if (state.aktifTab === 'profil') profilTabYukle();
+}
+
+locTxtGuncelle();
+anaSayfaYukle();
+</script>
+</body>
+</html>
