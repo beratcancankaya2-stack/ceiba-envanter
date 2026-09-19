@@ -423,6 +423,7 @@
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 var API_BASE = 'https://script.google.com/macros/s/AKfycbzOYnAxbWxpxZoNFpxh72_k4Ye7ly8lpc23s2zsM-aJbpkbd6jyTgxb28XRzoQOKYKq/exec';
 var _jsonpSayac = 0;
@@ -757,13 +758,12 @@ function cihaziDegistirGonder() {
 }
 function etiketGoster() {
   var seri = state.seciliKayit['Seri No'];
-  yukleniyorGoster(true);
-  api('qrGetir', { seriNo: seri }).then(function (url) {
-    yukleniyorGoster(false);
+  document.getElementById('etiketSeriMetni').textContent = seri + ' · ' + state.hastane;
+  QRCode.toDataURL(seri, { width: 260, margin: 1 }, function (err, url) {
+    if (err) { toast('Etiket oluşturulamadı', 'err'); return; }
     document.getElementById('etiketQrImg').src = url;
-    document.getElementById('etiketSeriMetni').textContent = seri + ' · ' + state.hastane;
     document.getElementById('modalEtiket').classList.add('active');
-  }).catch(hataGoster);
+  });
 }
 
 function raporlarTabYukle() {
