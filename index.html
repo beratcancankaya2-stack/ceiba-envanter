@@ -423,7 +423,7 @@
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 var API_BASE = 'https://script.google.com/macros/s/AKfycbzOYnAxbWxpxZoNFpxh72_k4Ye7ly8lpc23s2zsM-aJbpkbd6jyTgxb28XRzoQOKYKq/exec';
 var _jsonpSayac = 0;
@@ -755,9 +755,8 @@ function cihaziDegistirGonder() {
       hastaneSec(state.hastane);
     }
   }).catch(function (e) { yukleniyorGoster(false); hataGoster(e); });
-    }
-
-  function etiketGoster() {
+}
+function etiketGoster() {
   try {
     var seri = state.seciliKayit['Seri No'];
     if (typeof QRCode === 'undefined') {
