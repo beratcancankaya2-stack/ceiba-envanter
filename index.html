@@ -651,6 +651,23 @@ function kayitSecVeAc(seriNo) {
 
 function detayKapat() { document.getElementById('detayOverlay').classList.remove('active'); }
 
+function zorlaVideoBoyutu() {
+  var deneme = 0;
+  var interval = setInterval(function () {
+    deneme++;
+    var v = document.querySelector('#reader video');
+    if (v) {
+      v.style.setProperty('width', '100%', 'important');
+      v.style.setProperty('height', '100%', 'important');
+      v.style.setProperty('object-fit', 'cover', 'important');
+      v.style.setProperty('position', 'absolute', 'important');
+      v.style.setProperty('top', '0', 'important');
+      v.style.setProperty('left', '0', 'important');
+    }
+    if (deneme >= 6) clearInterval(interval);
+  }, 250);
+}
+
 function taramaAc(kaynak) {
   if (typeof Html5Qrcode === 'undefined') {
     toast('Kamera kütüphanesi henüz yüklenmedi, birazdan tekrar dene', 'err');
@@ -660,6 +677,7 @@ function taramaAc(kaynak) {
   setTimeout(function () {
     html5QrCode = new Html5Qrcode('reader');
     html5QrCode.start({ facingMode: 'environment' }, { fps: 12, qrbox: { width: 240, height: 240 } }, onTaramaBasarili, function () {})
+      .then(function () { zorlaVideoBoyutu(); })
       .catch(function () { toast('Kameraya erişilemedi. İzinleri kontrol et.', 'err'); taramaKapat(); });
   }, 80);
 }
