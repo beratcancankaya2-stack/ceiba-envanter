@@ -422,8 +422,8 @@
 
 <div id="toast"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 var API_BASE = 'https://script.google.com/macros/s/AKfycbzOYnAxbWxpxZoNFpxh72_k4Ye7ly8lpc23s2zsM-aJbpkbd6jyTgxb28XRzoQOKYKq/exec';
 var _jsonpSayac = 0;
@@ -649,6 +649,10 @@ function kayitSecVeAc(seriNo) {
 function detayKapat() { document.getElementById('detayOverlay').classList.remove('active'); }
 
 function taramaAc(kaynak) {
+  if (typeof Html5Qrcode === 'undefined') {
+    toast('Kamera kütüphanesi henüz yüklenmedi, birazdan tekrar dene', 'err');
+    return;
+  }
   document.getElementById('taramaOverlay').classList.add('active');
   setTimeout(function () {
     html5QrCode = new Html5Qrcode('reader');
