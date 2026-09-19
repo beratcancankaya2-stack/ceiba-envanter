@@ -755,15 +755,22 @@ function cihaziDegistirGonder() {
       hastaneSec(state.hastane);
     }
   }).catch(function (e) { yukleniyorGoster(false); hataGoster(e); });
-}
 function etiketGoster() {
-  var seri = state.seciliKayit['Seri No'];
-  document.getElementById('etiketSeriMetni').textContent = seri + ' · ' + state.hastane;
-  QRCode.toDataURL(seri, { width: 260, margin: 1 }, function (err, url) {
-    if (err) { toast('Etiket oluşturulamadı', 'err'); return; }
-    document.getElementById('etiketQrImg').src = url;
-    document.getElementById('modalEtiket').classList.add('active');
-  });
+  try {
+    var seri = state.seciliKayit['Seri No'];
+    if (typeof QRCode === 'undefined') {
+      toast('QR kütüphanesi yüklenemedi (internet/CDN engeli olabilir)', 'err');
+      return;
+    }
+    document.getElementById('etiketSeriMetni').textContent = seri + ' · ' + state.hastane;
+    QRCode.toDataURL(seri, { width: 260, margin: 1 }, function (err, url) {
+      if (err) { toast('Etiket oluşturulamadı: ' + err.message, 'err'); return; }
+      document.getElementById('etiketQrImg').src = url;
+      document.getElementById('modalEtiket').classList.add('active');
+    });
+  } catch (e) {
+    toast('Hata: ' + e.message, 'err');
+  }
 }
 
 function raporlarTabYukle() {
