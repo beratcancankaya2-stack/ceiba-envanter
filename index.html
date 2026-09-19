@@ -755,7 +755,9 @@ function cihaziDegistirGonder() {
       hastaneSec(state.hastane);
     }
   }).catch(function (e) { yukleniyorGoster(false); hataGoster(e); });
-function etiketGoster() {
+    }
+
+  function etiketGoster() {
   try {
     var seri = state.seciliKayit['Seri No'];
     if (typeof QRCode === 'undefined') {
